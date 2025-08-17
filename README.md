@@ -1,6 +1,6 @@
 Agri-Leaf-Monitor
 
-Agri-Leaf-Monitor is a Flask-based web application that detects healthy and diseased leaves of plants. Upload a leaf image to check its health and get tips for care.
+Agri-Leaf-Monitor is Flask-based web application that detects healthy and diseased leaves of plants. Upload a leaf image to check its health and get tips for care.
 
 Features
 - View healthy and diseased leaf samples.
