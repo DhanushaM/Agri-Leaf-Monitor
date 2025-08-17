@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farmer Disease Detector</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        .section { margin-top: 30px; }
+        .tips { margin-top: 10px; }
+        .image-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+        .image-grid img { width: 150px; height: auto; border-radius: 8px; }
+        button.toggle-btn { padding: 10px 20px; border-radius: 8px; cursor: pointer; margin: 5px; border: none; font-weight: bold; }
+        button.green-btn { background-color: #4CAF50; color: white; }
+        button.red-btn { background-color: #f44336; color: white; }
+        /* Upload section */
+        .upload-container { margin-top: 30px; text-align: center; }
+        .file-input { padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; width: 300px; }
+        .upload-btn, .delete-btn { padding: 14px 30px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin: 10px; transition: background-color 0.3s ease; }
+        .upload-btn { background-color: #4CAF50; color: white; }
+        .upload-btn:hover { background-color: #45a049; }
+        .delete-btn { background-color: #f44336; color: white; }
+        .delete-btn:hover { background-color: #da190b; }
+    </style>
+    <script>
+        function toggleSection(id) {
+            let section = document.getElementById(id);
+            if(section.style.display === 'none') section.style.display = 'flex';
+            else section.style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <h1>Farmer Disease Detector</h1>
+
+    <!-- Healthy Leaves Section -->
+    <div class="section">
+        <h2>Healthy Leaves</h2>
+        <button class="toggle-btn green-btn" onclick="toggleSection('healthy-grid')">Show/Hide Healthy Leaves</button>
+        <div class="image-grid" id="healthy-grid">
+            {% for img in healthy_images %}
+                <img src="{{ url_for('static', filename='healthy/' + img) }}" alt="Healthy Leaf">
+            {% endfor %}
+        </div>
+        <div class="tips">
+            <h3>Tips for Healthy Leaves:</h3>
+            <ul>
+            {% for tip in healthy_tips %}
+                <li>{{ tip }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Diseased Leaves Section -->
+    <div class="section">
+        <h2>Diseased Leaves</h2>
+        <button class="toggle-btn red-btn" onclick="toggleSection('diseased-grid')">Show/Hide Diseased Leaves</button>
+        <div class="image-grid" id="diseased-grid">
+            {% for img in diseased_images %}
+                <img src="{{ url_for('static', filename='diseased/' + img) }}" alt="Diseased Leaf">
+            {% endfor %}
+        </div>
+        <div class="tips">
+            <h3>Tips for Diseased Leaves:</h3>
+            <ul>
+            {% for tip in diseased_tips %}
+                <li>{{ tip }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="upload-container">
+        <h2>Upload Your Leaf</h2>
+        <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+            <input type="file" name="leaf" class="file-input" accept="image/*" required>
+            <br>
+            <button type="submit" class="upload-btn">Upload & Detect</button>
+            <button type="reset" class="delete-btn">Delete</button>
+        </form>
+    </div>
+</body>
+</html>

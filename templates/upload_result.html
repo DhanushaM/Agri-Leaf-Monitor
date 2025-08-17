@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaf Upload Result</title>
+</head>
+<body>
+    <h1>Leaf Upload Result</h1>
+    {% if result == 'healthy' %}
+        <h2 style="color:green;">Healthy Leaf</h2>
+    {% elif result == 'diseased' %}
+        <h2 style="color:red;">Diseased Leaf</h2>
+    {% else %}
+        <h2 style="color:orange;">Not a valid leaf!</h2>
+    {% endif %}
+    {% if filename %}
+    <img src="{{ url_for('static', filename='uploads/' + filename) }}" width="300">
+    {% endif %}
+    <br><br>
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>
